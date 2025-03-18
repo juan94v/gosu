@@ -7,7 +7,7 @@ class Projectile
     @direction = direction
 
     @sprite = Circle.new(x: @x, y: @y, radius: 3, color: 'red')
-    @speed = 10
+    @speed = 20
     @removed = false
   end
 

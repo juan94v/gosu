@@ -23,15 +23,18 @@ class PlayingState < BaseState
     case event.key
     when 'escape'
       StateMachine.change_state(MainMenuState.new)
-    when 'left'
+    when 'a'
       @moving_left = type == :held
       @player.facing_direction = :left
-    when 'right'
+    when 'd'
       @moving_right = type == :held
       @player.facing_direction = :right
     when 'space' # Salto
       @player.jump if type == :down && @player.can_jump?
-    when 'z' # Nueva entrada para disparar
+    when 's'
+      @player.run if type == :held
+      @player.walk if type == :up
+    when '.' # Nueva entrada para disparar
       if type == :down
         # Crea un nuevo proyectil y añádelo al array
         @projectiles << @player.shoot

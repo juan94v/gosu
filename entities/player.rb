@@ -40,6 +40,14 @@ class Player
     @vertical_speed = -15 # Fuerza del salto
     @can_jump = false
   end
+
+  def run
+    @speed = 10
+  end
+
+  def walk
+    @speed = 5
+  end
   
   def can_jump? = @can_jump
 
