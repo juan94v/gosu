@@ -44,7 +44,7 @@
 3. **Clone and Run** (3.2+):
    ```bash  
    # Use rbenv/rvm or system Ruby  
-   git clone https://github.com/YOUR_USERNAME/ruby-2d-platformer.git  
+   git clone https://github.com/juan94v/gosu.git
    cd ruby-2d-platformer  
    ruby main.rb
 
