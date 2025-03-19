@@ -1,6 +1,8 @@
 require_relative 'character'
 
 class Enemy < Character
+  attr_reader :projectiles
+
   def initialize()
     super(1100, 100, 40, 'red')
 

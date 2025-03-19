@@ -20,8 +20,7 @@ class PlayingState < BaseState
 
     @projectiles = []
 
-    @debug_texts = []  # Array para almacenar textos de debug
-    @debug_mode = true
+    @debug_texts = []
   end
 
   def handle_input(event, type)
@@ -51,6 +50,7 @@ class PlayingState < BaseState
   def exit
     @player.destroy
     @enemy.destroy
+    @enemy.projectiles.each(&:destroy)
     @text&.remove
   end
 
