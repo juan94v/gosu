@@ -17,6 +17,9 @@ class PlayingState < BaseState
     )
 
     @projectiles = []
+
+    @debug_texts = []  # Array para almacenar textos de debug
+    @debug_mode = true
   end
 
   def handle_input(event, type)
@@ -40,8 +43,8 @@ class PlayingState < BaseState
         @projectiles << @player.shoot
       end
     end
+    
   end
-  
 
   def exit
     @player.destroy
@@ -58,5 +61,19 @@ class PlayingState < BaseState
     @projectiles.each(&:update)
 
     @projectiles.reject!(&:removed?)
+
+    update_debug_info
+  end
+
+  def update_debug_info
+    # Limpiar textos anteriores
+    @debug_texts.each(&:remove)
+    @debug_texts.clear
+
+    # Crear nuevos textos
+    @debug_texts << Text.new("FPS: #{Window.fps}", x: Window.width - 150, y: 10, size: 15, color: "lime")
+    @debug_texts << Text.new("Player: (#{@player.sprite.x.round(2)}, #{@player.sprite.y.round(2)})", x: Window.width - 150, y: 30, size: 15, color: "lime")
+    @debug_texts << Text.new("Projectiles: #{@projectiles.size}", x: Window.width - 150, y: 50, size: 15, color: "lime")
+    @debug_texts << Text.new("Can Jump: #{@player.can_jump?}", x: Window.width - 150, y: 70, size: 15, color: "lime")
   end
 end
