@@ -1,8 +1,6 @@
 require_relative 'character'
 
 class Player < Character
-  attr_reader :sprite
-
   def initialize
     super(100, 100, 40, 'blue')
   end

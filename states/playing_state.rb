@@ -2,10 +2,12 @@
 require 'ruby2d'
 require_relative 'base_state'
 require_relative '../entities/player'
+require_relative '../entities/Enemy'
 
 class PlayingState < BaseState
   def enter
     @player = Player.new
+    @enemy = Enemy.new
     @text = Text.new("Playing... Press ESC to return", y: 10)
     @moving_left = false  # Nuevas variables de estado
     @moving_right = false
@@ -48,6 +50,7 @@ class PlayingState < BaseState
 
   def exit
     @player.destroy
+    @enemy.destroy
     @text&.remove
   end
 
@@ -57,6 +60,8 @@ class PlayingState < BaseState
       moving_right: @moving_right,
       floor_y: @floor.y
     )
+
+    @enemy.update(floor_y: @floor.y)
 
     @projectiles.each(&:update)
 
