@@ -1,16 +1,10 @@
-require_relative 'projectile' 
+require_relative 'character'
 
-class Player
+class Player < Character
   attr_reader :sprite
-  attr_writer :facing_direction
 
   def initialize
-    @sprite = Square.new(x: 100, y: 100, size: 40, color: 'blue')
-    @speed = 5
-    @gravity = 0.5
-    @vertical_speed = 0
-    @can_jump = false
-    @facing_direction = :right
+    super(100, 100, 40, 'blue')
   end
 
   def update(moving_left:, moving_right:, floor_y:)
@@ -36,25 +30,11 @@ class Player
     @sprite.remove
   end
 
-  def jump
-    @vertical_speed = -15 # Fuerza del salto
-    @can_jump = false
-  end
-
   def run
     @speed = 10
   end
 
   def walk
     @speed = 5
-  end
-  
-  def can_jump? = @can_jump
-
-  def shoot
-    x = @sprite.x + @sprite.width / 2
-    y = @sprite.y + @sprite.height / 2
-
-    Projectile.new(x, y, @facing_direction)
   end
 end
