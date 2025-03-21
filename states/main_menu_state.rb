@@ -4,7 +4,6 @@ require_relative 'base_state'
 
 class MainMenuState < BaseState
   def enter
-    puts "Entering Main Menu"  # Debug message
     @title = Text.new("METAL SLUG-LIKE", size: 48, y: 100)
     @options = [
       Text.new("1. Play", y: 200),

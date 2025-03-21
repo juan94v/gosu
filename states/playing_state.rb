@@ -3,6 +3,7 @@ require 'ruby2d'
 require_relative 'base_state'
 require_relative '../entities/player'
 require_relative '../entities/Enemy'
+require_relative '../managers/collision_manager'
 
 class PlayingState < BaseState
   def enter
@@ -40,7 +41,6 @@ class PlayingState < BaseState
       @player.walk if type == :up
     when '.' # Nueva entrada para disparar
       if type == :down
-        # Crea un nuevo proyectil y añádelo al array
         @projectiles << @player.shoot
       end
     end
@@ -66,6 +66,9 @@ class PlayingState < BaseState
     @projectiles.each(&:update)
 
     @projectiles.reject!(&:removed?)
+
+    CollisionManager.check_projectile_collisions(@projectiles, [@enemy])
+    CollisionManager.check_projectile_collisions(@enemy.projectiles, [@player])
 
     update_debug_info
   end
